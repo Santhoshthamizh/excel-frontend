@@ -45,7 +45,7 @@ function App() {
     formData.append("file", uploadedFile);
 
     axios
-      .post("http://127.0.0.1:8000/upload/", formData)
+      .post("https://graphify-backend.onrender.com/upload/", formData)
       .then((res) => {
         setSheets(res.data.sheets);
         setCurrentPage("options");
@@ -66,7 +66,7 @@ function App() {
     formData.append("sheet_name", sheet);
 
     axios
-      .post("http://127.0.0.1:8000/columns/", formData)
+      .post("https://graphify-backend.onrender.com/columns/", formData)
       .then((res) => setColumns(res.data.columns))
       .catch(() => alert("Failed to load columns"));
   };
@@ -89,11 +89,11 @@ function App() {
 
     try {
       if (format === "json") {
-        const res = await axios.post("http://127.0.0.1:8000/generate/", formData);
+        const res = await axios.post("https://graphify-backend.onrender.com/generate/", formData);
         setChartData(JSON.parse(res.data.chart));
         setDownloadLink("");
       } else {
-        const res = await axios.post("http://127.0.0.1:8000/generate/", formData, {
+        const res = await axios.post("https://graphify-backend.onrender.com/generate/", formData, {
           responseType: "blob",
         });
         const blob = new Blob([res.data], { type: res.headers["content-type"] });
